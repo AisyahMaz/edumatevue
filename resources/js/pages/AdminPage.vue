@@ -21,7 +21,7 @@
       <!-- Card 3 -->
       <div class="bg-white rounded-lg shadow p-4">
         <h2 class="font-semibold text-lg mb-2">Products</h2>
-        <p>Total products: 12</p>
+        <p>Total products: 12 Asiayahtry</p>
         <button class="mt-2 bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">View Products</button>
       </div>
 
