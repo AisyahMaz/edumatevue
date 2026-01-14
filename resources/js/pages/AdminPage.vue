@@ -7,7 +7,7 @@
       <!-- Card 1 -->
       <div class="bg-white rounded-lg shadow p-4">
         <h2 class="font-semibold text-lg mb-2">Users</h2>
-        <p>Total users: 42</p>
+        <p>AsiyahTotal users: 42</p>
         <button class="mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">View Users</button>
       </div>
 
