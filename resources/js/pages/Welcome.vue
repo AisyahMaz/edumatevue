@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { dashboard, login, register } from '@/routes';
+import { dashboard, login, register,adminPage } from '@/routes';
 import { Head, Link } from '@inertiajs/vue3';
 
 withDefaults(
@@ -60,7 +60,7 @@ withDefaults(
                     <h1 class="mb-1 font-medium">Let's get started</h1>
                     <p class="mb-2 text-[#706f6c] dark:text-[#A1A09A]">
                         Laravel has an incredibly rich ecosystem. <br />We
-                        suggest starting with the following.
+                        suggest starting with the following. Test.
                     </p>
                     <ul class="mb-4 flex flex-col lg:mb-6">
                         <li
@@ -149,9 +149,16 @@ withDefaults(
                                 target="_blank"
                                 class="inline-block rounded-sm border border-black bg-[#1b1b18] px-5 py-1.5 text-sm leading-normal text-white hover:border-black hover:bg-black dark:border-[#eeeeec] dark:bg-[#eeeeec] dark:text-[#1C1C1A] dark:hover:border-white dark:hover:bg-white"
                             >
-                                Deploy nowss
+                                Deploy now
                             </a>
                         </li>
+                        <Link
+                        
+                        :href="adminPage()"
+                        class="inline-block rounded-sm border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#1915014a] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:hover:border-[#62605b]"
+                    >
+                        Adminpage
+                    </Link>
                     </ul>
                 </div>
                 <div

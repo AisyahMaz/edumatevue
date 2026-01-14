@@ -14,4 +14,15 @@ Route::get('dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+//with authentication
+// Route::get('AdminPage', function () {
+//     return Inertia::render('AdminPage');
+// })->middleware(['auth', 'verified'])->name('adminPage');
+
+
+Route::get('AdminPage', function () {
+    return Inertia::render('AdminPage');
+})->name('adminPage');
+
+
 require __DIR__.'/settings.php';
