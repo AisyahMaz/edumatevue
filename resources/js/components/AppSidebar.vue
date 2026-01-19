@@ -11,16 +11,27 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { dashboard } from '@/routes';
+import { adminPage, dashboard ,course} from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
 import { BookOpen, Folder, LayoutGrid } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
+import Course from '@/pages/Course.vue';
 
 const mainNavItems: NavItem[] = [
     {
-        title: 'Dashboard',
+        title: 'Home',
         href: dashboard(),
+        icon: LayoutGrid,
+    },
+     {
+        title: 'Admin',
+        href: adminPage(),
+        icon: LayoutGrid,
+    },
+    {
+        title: 'Course',
+        href: course(),
         icon: LayoutGrid,
     },
 ];

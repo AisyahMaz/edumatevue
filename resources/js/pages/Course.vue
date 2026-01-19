@@ -10,7 +10,7 @@ const breadcrumbs: BreadcrumbItem[] = [
         href: dashboard().url,
     },
     {
-        title: 'Admin',
+        title: 'Course',
         href: adminPage().url,
     },
 ];
@@ -24,7 +24,7 @@ const breadcrumbs: BreadcrumbItem[] = [
     <AppLayout :breadcrumbs="breadcrumbs">
 
   <div class="p-6">
-    <h1 class="text-3xl font-bold mb-4 text-center">Admin Dashboard</h1>
+    <h1 class="text-3xl font-bold mb-4 text-center">Course</h1>
     
     
     

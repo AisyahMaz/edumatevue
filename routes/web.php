@@ -24,5 +24,13 @@ Route::get('AdminPage', function () {
     return Inertia::render('AdminPage');
 })->name('adminPage');
 
+Route::get('ManagementPage', function () {
+    return Inertia::render('ManagementPage');
+})->name('managementPage');
+
+Route::get('Course', function () {
+    return Inertia::render('Course');
+})->name('course');
+
 
 require __DIR__.'/settings.php';

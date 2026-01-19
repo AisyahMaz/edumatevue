@@ -1,10 +1,25 @@
 <script setup lang="ts">
-import { dashboard, login, register,adminPage } from '@/routes';
-import { Head, Link } from '@inertiajs/vue3';
+import { dashboard, login, register,adminPage,managementPage } from '@/routes';
+import { Head, Link,Form } from '@inertiajs/vue3';
+import InputError from '@/components/InputError.vue';
+import TextLink from '@/components/TextLink.vue';
+import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Spinner } from '@/components/ui/spinner';
+import AuthBase from '@/layouts/AuthLayout.vue';
+// import { register } from '@/routes';
+import { store } from '@/routes/login';
+import { request } from '@/routes/password';
+// import { Form, Head } from '@inertiajs/vue3';
+
 
 withDefaults(
     defineProps<{
         canRegister: boolean;
+        status?: string;
+    canResetPassword: boolean;
     }>(),
     {
         canRegister: true,
@@ -13,6 +28,7 @@ withDefaults(
 </script>
 
 <template>
+   
     <Head title="Welcome">
         <link rel="preconnect" href="https://rsms.me/" />
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
@@ -57,12 +73,99 @@ withDefaults(
                 <div
                     class="flex-1 rounded-br-lg rounded-bl-lg bg-white p-6 pb-12 text-[13px] leading-[20px] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] lg:rounded-tl-lg lg:rounded-br-none lg:p-20 dark:bg-[#161615] dark:text-[#EDEDEC] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]"
                 >
-                    <h1 class="mb-1 font-medium">Let's get started</h1>
-                    <p class="mb-2 text-[#706f6c] dark:text-[#A1A09A]">
+                    <!-- <h1 class="mb-1 font-medium text-center text-3xl">EDUMATE AISYAH</h1> -->
+                      <AuthBase
+        title="Log in to your account"
+        description="Enter your email and password below to log in"
+    >
+        <Head title="Log in" />
+
+        <div
+            v-if="status"
+            class="mb-0 text-center text-sm font-medium text-green-600"
+        >
+            {{ status }}
+        </div>
+
+        <Form
+            v-bind="store.form()"
+            :reset-on-success="['password']"
+            v-slot="{ errors, processing }"
+            class="flex flex-col gap-6"
+        >
+            <div class="grid gap-6">
+                <div class="grid gap-2">
+                    <Label for="email">Email address</Label>
+                    <Input
+                        id="email"
+                        type="email"
+                        name="email"
+                        required
+                        autofocus
+                        :tabindex="1"
+                        autocomplete="email"
+                        placeholder="email@example.com"
+                    />
+                    <InputError :message="errors.email" />
+                </div>
+
+                <div class="grid gap-2">
+                    <div class="flex items-center justify-between">
+                        <Label for="password">Password</Label>
+                        <TextLink
+                            v-if="canResetPassword"
+                            :href="request()"
+                            class="text-sm"
+                            :tabindex="5"
+                        >
+                            Forgot password?
+                        </TextLink>
+                    </div>
+                    <Input
+                        id="password"
+                        type="password"
+                        name="password"
+                        required
+                        :tabindex="2"
+                        autocomplete="current-password"
+                        placeholder="Password"
+                    />
+                    <InputError :message="errors.password" />
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <Label for="remember" class="flex items-center space-x-3">
+                        <Checkbox id="remember" name="remember" :tabindex="3" />
+                        <span>Remember me</span>
+                    </Label>
+                </div>
+
+                <Button
+                    type="submit"
+                    class="mt-4 w-full"
+                    :tabindex="4"
+                    :disabled="processing"
+                    data-test="login-button"
+                >
+                    <Spinner v-if="processing" />
+                    Log in
+                </Button>
+            </div>
+
+            <div
+                class="text-center text-sm text-muted-foreground"
+                v-if="canRegister"
+            >
+                Don't have an account?
+                <TextLink :href="register()" :tabindex="5">Sign up</TextLink>
+            </div>
+        </Form>
+    </AuthBase>
+                    <!-- <p class="mb-2 text-[#706f6c] dark:text-[#A1A09A]">
                         Laravel has an incredibly rich ecosystem. <br />We
                         suggest starting with the following. Test.
-                    </p>
-                    <ul class="mb-4 flex flex-col lg:mb-6">
+                    </p> -->
+                    <!-- <ul class="mb-4 flex flex-col lg:mb-6">
                         <li
                             class="relative flex items-center gap-4 py-2 before:absolute before:top-1/2 before:bottom-0 before:left-[0.4rem] before:border-l before:border-[#e3e3e0] dark:before:border-[#3E3E3A]"
                         >
@@ -141,27 +244,30 @@ withDefaults(
                                 </a>
                             </span>
                         </li>
-                    </ul>
+                    </ul> -->
+                    <div class="mx-auto mb-4 w-32 h-32 bg-gray-300 flex items-center justify-center rounded-full">
+  <span class="text-gray-600 font-bold">LOGO</span>
+</div>
+
+
                     <ul class="flex gap-3 text-sm leading-normal">
-                        <li>
-                            <a
-                                href="https://cloud.laravel.com"
-                                target="_blank"
-                                class="inline-block rounded-sm border border-black bg-[#1b1b18] px-5 py-1.5 text-sm leading-normal text-white hover:border-black hover:bg-black dark:border-[#eeeeec] dark:bg-[#eeeeec] dark:text-[#1C1C1A] dark:hover:border-white dark:hover:bg-white"
-                            >
-                                Deploy now
-                            </a>
-                        </li>
                         <Link
                         
                         :href="adminPage()"
                         class="inline-block rounded-sm border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#1915014a] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:hover:border-[#62605b]"
                     >
-                        Adminpage
+                        Admin Page
+                    </Link>
+                    <Link
+                        
+                        :href="managementPage()"
+                        class="inline-block rounded-sm border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#1915014a] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:hover:border-[#62605b]"
+                    >
+                        Management Page
                     </Link>
                     </ul>
                 </div>
-                <div
+                <!-- <div
                     class="relative -mb-px aspect-335/376 w-full shrink-0 overflow-hidden rounded-t-lg bg-[#fff2f2] lg:mb-0 lg:-ml-px lg:aspect-auto lg:w-[438px] lg:rounded-t-none lg:rounded-r-lg dark:bg-[#1D0002]"
                 >
                     <svg
@@ -841,7 +947,7 @@ withDefaults(
                     <div
                         class="absolute inset-0 rounded-t-lg shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] lg:overflow-hidden lg:rounded-t-none lg:rounded-r-lg dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]"
                     />
-                </div>
+                </div> -->
             </main>
         </div>
         <div class="hidden h-14.5 lg:block"></div>
