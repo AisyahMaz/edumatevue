@@ -14,4 +14,23 @@ Route::get('dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+//with authentication
+// Route::get('AdminPage', function () {
+//     return Inertia::render('AdminPage');
+// })->middleware(['auth', 'verified'])->name('adminPage');
+
+
+Route::get('AdminPage', function () {
+    return Inertia::render('AdminPage');
+})->name('adminPage');
+
+Route::get('ManagementPage', function () {
+    return Inertia::render('ManagementPage');
+})->name('managementPage');
+
+Route::get('Course', function () {
+    return Inertia::render('Course');
+})->name('course');
+
+
 require __DIR__.'/settings.php';
